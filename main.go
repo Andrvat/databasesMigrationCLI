@@ -6,5 +6,6 @@ package main
 import "migrator/cmd"
 
 func main() {
+
 	cmd.Execute()
 }
