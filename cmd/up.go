@@ -13,7 +13,7 @@ import (
 	"strconv"
 )
 
-// upCmd represents the up command
+//  upCmd represents the up command
 var upCmd = &cobra.Command{
 	Use:   "up [ver]",
 	Short: "Up migration operation that makes the database version the latest or corresponding to a given version",

@@ -12,7 +12,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// downCmd represents the down command
+//  downCmd represents the down command
 var downCmd = &cobra.Command{
 	Use:   "down [ver]",
 	Short: "Down migration operation that makes the database version the initially or corresponding to a given version",

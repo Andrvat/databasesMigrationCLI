@@ -9,7 +9,7 @@ import (
 	"log"
 )
 
-// rootCmd represents the base command when called without any subcommands
+//  rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "migrator",
 	Short: "CLI application that provides databases migration operations",

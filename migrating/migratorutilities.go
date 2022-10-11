@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 )
-
+// bluh
 func CloseConn(db *sql.DB) {
 	if err := db.Close(); err != nil {
 		log.Fatal(err)

@@ -17,7 +17,7 @@ type MigratorConfig struct {
 	DatabaseName     string `validate:"required"`
 	SourceUrl        string `validate:"required"`
 }
-
+// bluh
 var validate *validator.Validate
 
 func newMigratorConfig() (*MigratorConfig, error) {
