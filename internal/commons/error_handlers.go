@@ -1,4 +1,4 @@
-package migrating
+package commons
 
 import (
 	"database/sql"
@@ -11,7 +11,7 @@ func CloseConn(db *sql.DB) {
 	}
 }
 
-func Finally(err error) {
+func HandleMigrationErr(err error) {
 	if err != nil && err.Error() != "no change" {
 		log.Fatal(err)
 	}
