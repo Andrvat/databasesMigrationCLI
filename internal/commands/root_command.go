@@ -10,7 +10,7 @@ import (
 )
 
 type MigrationCli struct {
-	RootCommand *cobra.Command
+	rootCommand *cobra.Command
 }
 
 func NewMigrationCli() *MigrationCli {
@@ -33,7 +33,7 @@ SOURCE_URL		Format: path/to/migrations/folder 	Example: /home/golang/project/mig
 }
 
 func (m *MigrationCli) Execute() {
-	err := m.RootCommand.Execute()
+	err := m.rootCommand.Execute()
 	if err != nil {
 		log.Fatal(err)
 	}
