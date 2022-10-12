@@ -10,24 +10,16 @@ import (
 )
 
 type MigratorConfig struct {
-	DriverName       string `validate:"required"`
-	DatabaseUser     string `validate:"required"`
-	DatabasePassword string `validate:"required"`
-	DatabaseUrl      string `validate:"required"`
-	DatabaseName     string `validate:"required"`
-	SourceUrl        string `validate:"required"`
+	DataSourceName string `validate:"required,contains=sslmode=disable"`
+	SourceUrl      string `validate:"required"`
 }
 
 var validate *validator.Validate
 
 func newMigratorConfig() (*MigratorConfig, error) {
 	config := &MigratorConfig{
-		DriverName:       os.Getenv("DRIVER_NAME"),
-		DatabaseUser:     os.Getenv("DATABASE_USER"),
-		DatabasePassword: os.Getenv("DATABASE_PASSWORD"),
-		DatabaseUrl:      os.Getenv("DATABASE_URL"),
-		DatabaseName:     os.Getenv("DATABASE_NAME"),
-		SourceUrl:        os.Getenv("SOURCE_URL"),
+		DataSourceName: os.Getenv("POSTGRES_DSN"),
+		SourceUrl:      getEnvOrDefault("SOURCE_URL", "./"),
 	}
 
 	validate = validator.New()
@@ -45,9 +37,7 @@ func ConfigureMigrator() (*migrate.Migrate, *sql.DB, error) {
 		return nil, nil, err
 	}
 
-	db, err := sql.Open(config.DriverName,
-		fmt.Sprintf("%s://%s:%s@%s/%s?sslmode=disable",
-			config.DriverName, config.DatabaseUser, config.DatabasePassword, config.DatabaseUrl, config.DatabaseName))
+	db, err := sql.Open("postgres", config.DataSourceName)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -62,4 +52,11 @@ func ConfigureMigrator() (*migrate.Migrate, *sql.DB, error) {
 	}
 
 	return migrator, db, nil
+}
+
+func getEnvOrDefault(envKey string, defaultValue string) string {
+	if value, exist := os.LookupEnv(envKey); exist {
+		return value
+	}
+	return defaultValue
 }

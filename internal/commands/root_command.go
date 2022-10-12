@@ -19,12 +19,8 @@ func NewMigrationCli() *MigrationCli {
 		Short: "CLI application that provides databases migration operations",
 		Long: `CLI application that provides databases migration operations {up [ver], down [ver]}
 Before run this CLI app you need to export the following environment variables:
-DRIVER_NAME							Example: postgres
-DATABASE_USER							Example: username
-DATABASE_PASSWORD						Example: your123password
-DATABASE_URL		Format: url:port			Example: localhost:5432
-DATABASE_NAME							Example: awesome_db
-SOURCE_URL		Format: path/to/migrations/folder 	Example: /home/golang/project/migrations`,
+POSTGRES_DSN		Format: postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]		Example: postgresql://super:123123@localhost:5432/awesome?key=value&sslmode=disable
+SOURCE_URL		Format: /path/to/migrations/folder/from/root. Default: ./					Example: /home/golang/project/migrations`,
 	}
 
 	rootCommand.AddCommand(NewDownCommand())
