@@ -37,14 +37,15 @@ func NewUpCommand() *cobra.Command {
 					log.Fatal(err)
 				}
 				err = migrator.Steps(ver)
-			} else {
-				if len(args) != 0 {
-					log.Fatal("up without -v flag does not accept any parameters")
-				}
-				err = migrator.Up()
+				commons.HandleMigrationErr(err, "Up complete!")
+				return
 			}
-			commons.HandleMigrationErr(err)
-			log.Println("Up complete!")
+
+			if len(args) != 0 {
+				log.Fatal("up without -v flag does not accept any parameters")
+			}
+			err = migrator.Up()
+			commons.HandleMigrationErr(err, "Up complete!")
 		},
 	}
 

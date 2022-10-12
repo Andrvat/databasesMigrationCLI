@@ -37,14 +37,15 @@ func NewDownCommand() *cobra.Command {
 				}
 				ver *= -1
 				err = migrator.Steps(ver)
-			} else {
-				if len(args) != 0 {
-					log.Fatal("down without -v flag does not accept any parameters")
-				}
-				err = migrator.Down()
+				commons.HandleMigrationErr(err, "Down complete!")
+				return
 			}
-			commons.HandleMigrationErr(err)
-			log.Println("Down complete!")
+
+			if len(args) != 0 {
+				log.Fatal("down without -v flag does not accept any parameters")
+			}
+			err = migrator.Down()
+			commons.HandleMigrationErr(err, "Down complete!")
 		},
 	}
 
