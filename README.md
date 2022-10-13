@@ -10,8 +10,11 @@ CLI application that provides databases migration operations {up [ver], down [ve
 
 ## Introduction
 
-This is a CLI application that provides databases migration operations {up [ver], down [ver]}. 
+### Summary
+This is a CLI application that provides databases migration operations {up [ver], down [ver]}.
 
+### Supported databases
+* PostgreSQL
 
 ## Requirements
 The application can be run locally or in a docker container, the requirements for each setup are listed below.
